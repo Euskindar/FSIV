@@ -1,0 +1,123 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.6"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "cv_tutorial",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ej1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ej1-d25949afc35d23547ba9.json",
+					"name" : "ej1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "extra::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-extra-0884a927cfaeb8bab7f0.json",
+					"name" : "extra",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "histo::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-histo-7bd29e7007efb7b6c920.json",
+					"name" : "histo",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "prg1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-prg1-b45ff5ac56f65a48c19a.json",
+					"name" : "prg1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "prg2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-prg2-c9ee80d53aafbd6a5d40.json",
+					"name" : "prg2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "prg3::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-prg3-9106ef37b3bc4e1da505.json",
+					"name" : "prg3",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "prg4::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-prg4-dfc091a9d345da9e9f0d.json",
+					"name" : "prg4",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "prg5::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-prg5-aaa65330a7bb32c7495e.json",
+					"name" : "prg5",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/i72pehej/FSIV_6/cv_tutorial/build",
+		"source" : "/home/i72pehej/FSIV_6/cv_tutorial"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
