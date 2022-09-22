@@ -1,0 +1,3 @@
+/home/jolon/Escritorio/FSIV/Pr1/fsiv_p1/build/CMakeFiles/foregh.dir
+/home/jolon/Escritorio/FSIV/Pr1/fsiv_p1/build/CMakeFiles/edit_cache.dir
+/home/jolon/Escritorio/FSIV/Pr1/fsiv_p1/build/CMakeFiles/rebuild_cache.dir
