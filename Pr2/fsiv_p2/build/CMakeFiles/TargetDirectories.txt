@@ -1,0 +1,3 @@
+/home/jolon/Escritorio/FSIV/Pr2/fsiv_p2/build/CMakeFiles/pixgui.dir
+/home/jolon/Escritorio/FSIV/Pr2/fsiv_p2/build/CMakeFiles/edit_cache.dir
+/home/jolon/Escritorio/FSIV/Pr2/fsiv_p2/build/CMakeFiles/rebuild_cache.dir
