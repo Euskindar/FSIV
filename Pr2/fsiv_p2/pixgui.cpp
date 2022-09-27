@@ -28,13 +28,16 @@ int add;
 
 bool sub_flag = false;
 
-const int RGB_slider_max = 255;
 int R_slider;
 int G_slider;
 int B_slider;
-int R;
-int G;
-int B;
+
+int mult_R_slider;
+int mult_G_slider;
+int mult_B_slider;
+int mult_R;
+int mult_G;
+int mult_B;
 
 
 cv::Mat img;
@@ -55,7 +58,6 @@ static void on_trackbar_mult(int, void*)
 {
     mult = (double) mult_slider / mult_slider_max;
     
-    // Do something to the proc image
     std::cout << mult << std::endl;
     // TO DO
 
@@ -70,7 +72,6 @@ static void on_trackbar_add(int, void*)
 {
     add = add_slider;
     
-    // Do something to the proc image
     std::cout << add << std::endl;
     // TO DO
 
@@ -87,9 +88,49 @@ static void on_trackbar_add(int, void*)
 }
 
 
+// Trackbar to multiply RGB
+static void on_trackbar_mult_RGB(int, void*)
+{
+    mult_R = (double)mult_R_slider/*  / mult_slider_max */;
+    mult_G = (double)mult_G_slider/*  / mult_slider_max */;
+    mult_B = (double)mult_B_slider/*  / mult_slider_max */;
+
+    std::cout << "R mult: " << (double)mult_R / mult_slider_max << std::endl;
+    std::cout << "G mult: " << (double)mult_G / mult_slider_max << std::endl;
+    std::cout << "B mult: " << (double)mult_B / mult_slider_max << std::endl;
+    // TO DO
+
+    fsiv_mult_safe_RGB(img, out, mult_R, mult_G, mult_B);
+    
+    cv::imshow("Processed", out);
+}
+
+
+// Trackbar to add RGB
+static void on_trackbar_add_RGB(int, void*)
+{
+    std::cout << "R add: " << R_slider << std::endl;
+    std::cout << "G add: " << G_slider << std::endl;
+    std::cout << "B add: " << B_slider << std::endl;
+    // TO DO
+
+    if(sub_flag == false)
+    {
+        fsiv_add_safe_RGB(img, out, R_slider, G_slider, B_slider);       
+    }
+    else
+    {
+        fsiv_sub_safe_RGB(img, out, R_slider, G_slider, B_slider);       
+    }
+    
+    cv::imshow("Processed", out);
+}
+
+
 int main (int argc, char* const* argv)
 {
     int retCode = EXIT_SUCCESS;
+    bool gray_flag = false;
 
     try
     {
@@ -112,6 +153,7 @@ int main (int argc, char* const* argv)
             cv::String image = parser.get<cv::String>(0);
             img = cv::imread(image, cv::IMREAD_GRAYSCALE);
             img = convert_gray_to_rgb(img);
+            gray_flag = true;
         }
         // Read the image as Inverted image
         else if(parser.has("Invert"))
@@ -139,8 +181,6 @@ int main (int argc, char* const* argv)
             return 0;
         }
 
-        // Type your code here and within 'common_code.cpp'
-
         img.copyTo(out);
 
         cv::namedWindow("Original", cv::WINDOW_AUTOSIZE); // Create Window
@@ -149,9 +189,16 @@ int main (int argc, char* const* argv)
         cv::createTrackbar("Mult", "Processed", &mult_slider, mult_slider_max, on_trackbar_mult);
         cv::createTrackbar("Add", "Processed", &add_slider, add_slider_max, on_trackbar_add);
 
-        cv::createTrackbar("R", "Processed", &R_slider, RGB_slider_max, on_trackbar_add);
-        cv::createTrackbar("G", "Processed", &G_slider, RGB_slider_max, on_trackbar_add);
-        cv::createTrackbar("B", "Processed", &B_slider, RGB_slider_max, on_trackbar_add);
+        if (gray_flag == false)
+        {
+            cv::createTrackbar("R Mult", "Processed", &mult_R_slider, mult_slider_max, on_trackbar_mult_RGB);
+            cv::createTrackbar("G Mult", "Processed", &mult_G_slider, mult_slider_max, on_trackbar_mult_RGB);
+            cv::createTrackbar("B Mult", "Processed", &mult_B_slider, mult_slider_max, on_trackbar_mult_RGB);
+
+            cv::createTrackbar("R Add", "Processed", &R_slider, add_slider_max, on_trackbar_add_RGB);
+            cv::createTrackbar("G Add", "Processed", &G_slider, add_slider_max, on_trackbar_add_RGB);
+            cv::createTrackbar("B Add", "Processed", &B_slider, add_slider_max, on_trackbar_add_RGB);
+        }
 
         cv::imshow("Original", img);
         cv::imshow("Processed", out);
@@ -166,7 +213,7 @@ int main (int argc, char* const* argv)
                 cout << "Image saved!" << endl;
             }
 
-            if(key == 'm' && sub_flag == false)
+            if((key == 'm' || key == 'M') && sub_flag == false)
             {
                 sub_flag = true;
                 cout<<"Subtract mode ON"<<endl;
