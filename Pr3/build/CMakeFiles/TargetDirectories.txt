@@ -1,0 +1,3 @@
+/home/i72pehej/FSIV_6/Pr3/build/CMakeFiles/filtering.dir
+/home/i72pehej/FSIV_6/Pr3/build/CMakeFiles/edit_cache.dir
+/home/i72pehej/FSIV_6/Pr3/build/CMakeFiles/rebuild_cache.dir
