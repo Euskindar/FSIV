@@ -13,10 +13,10 @@ void fsiv_convolution(const cv::Mat& src, cv::Mat& dst, const cv::Mat& kernel, i
 
 
     // Select the pixels of the source image
-    for (int i = 0; i < src.rows; i++) {
-        for (int j = 0; j < src.cols; j++) {
-            const uchar *ptr = src.ptr<uchar>(i) + 3 * j; // access to the pixel
-            uchar *ptrO = dst.ptr<uchar>(i) + 3 * j;    // Output image pixel
+    for (int src_row = 0; src_row < src.rows; src_row++) {
+        for (int src_col = 0; src_col < src.cols; src_col++) {
+            const uchar *ptr = src.ptr<uchar>(src_row) + 3 * src_col; // access to the pixel
+            uchar *ptrO = dst.ptr<uchar>(src_row) + 3 * src_col;    // Output image pixel
 
             // Select pixels of the kernel
             for (int k = 0; k < kernel.rows; k++) {
