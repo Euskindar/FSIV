@@ -23,6 +23,8 @@ add_executable(prg5 prg5.cpp)
 
 add_executable(extra extra.cpp)
 
-add_executable(ej1 ej1.cpp)
+#add_executable(ej1 ej1.cpp)
  
 add_executable(histo histo.cpp)
+
+add_executable(convo MAIN.cpp task3.cpp task3.hpp)

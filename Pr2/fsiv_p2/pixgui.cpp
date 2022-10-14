@@ -18,6 +18,7 @@
 
 using namespace std;
 
+// Global variables
 const int mult_slider_max = 100;
 int mult_slider;
 double mult;
@@ -35,14 +36,16 @@ int B_slider;
 int mult_R_slider;
 int mult_G_slider;
 int mult_B_slider;
-int mult_R;
-int mult_G;
-int mult_B;
+double mult_R;
+double mult_G;
+double mult_B;
 
-
+// Images
 cv::Mat img;
 cv::Mat out;
 
+
+////////////////////////////////////////////////////////////////////
 
 const string keys =
 	"{help h usage ?  |     | All parameters descriptions}"
@@ -52,59 +55,63 @@ const string keys =
     "{Invert i I      |     | Load image in inverted}"
 ;
 
+////////////////////////////////////////////////////////////////////
 
 // Trackbar to multiply
 static void on_trackbar_mult(int, void*)
 {
     mult = (double) mult_slider / mult_slider_max;
-    
+
     std::cout << mult << std::endl;
     // TO DO
 
-    fsiv_mult_safe(img, out, mult_slider);
-    
+    fsiv_mult_safe(img, out, mult);
+
     cv::imshow("Processed", out);
 }
 
+////////////////////////////////////////////////////////////////////
 
 // Trackbar to add
 static void on_trackbar_add(int, void*)
 {
     add = add_slider;
-    
+
     std::cout << add << std::endl;
     // TO DO
 
     if(sub_flag == false)
     {
-        fsiv_add_safe(img, out, add_slider);       
+        fsiv_add_safe(img, out, add_slider);
     }
     else
     {
-        fsiv_sub_safe(img, out, add_slider);       
+        fsiv_sub_safe(img, out, add_slider);
     }
-    
+
     cv::imshow("Processed", out);
 }
 
+////////////////////////////////////////////////////////////////////
 
 // Trackbar to multiply RGB
 static void on_trackbar_mult_RGB(int, void*)
 {
-    mult_R = (double)mult_R_slider/*  / mult_slider_max */;
-    mult_G = (double)mult_G_slider/*  / mult_slider_max */;
-    mult_B = (double)mult_B_slider/*  / mult_slider_max */;
+    mult_R = (double)mult_R_slider / mult_slider_max;
+    mult_G = (double)mult_G_slider / mult_slider_max;
+    mult_B = (double)mult_B_slider / mult_slider_max;
 
-    std::cout << "R mult: " << (double)mult_R / mult_slider_max << std::endl;
-    std::cout << "G mult: " << (double)mult_G / mult_slider_max << std::endl;
-    std::cout << "B mult: " << (double)mult_B / mult_slider_max << std::endl;
+    std::cout << "R mult: " << (double)mult_R << std::endl;
+    std::cout << "G mult: " << (double)mult_G << std::endl;
+    std::cout << "B mult: " << (double)mult_B << std::endl;
     // TO DO
 
     fsiv_mult_safe_RGB(img, out, mult_R, mult_G, mult_B);
-    
+
     cv::imshow("Processed", out);
 }
 
+////////////////////////////////////////////////////////////////////
 
 // Trackbar to add RGB
 static void on_trackbar_add_RGB(int, void*)
@@ -116,24 +123,27 @@ static void on_trackbar_add_RGB(int, void*)
 
     if(sub_flag == false)
     {
-        fsiv_add_safe_RGB(img, out, R_slider, G_slider, B_slider);       
+        fsiv_add_safe_RGB(img, out, R_slider, G_slider, B_slider);
     }
     else
     {
-        fsiv_sub_safe_RGB(img, out, R_slider, G_slider, B_slider);       
+        fsiv_sub_safe_RGB(img, out, R_slider, G_slider, B_slider);
     }
-    
+
     cv::imshow("Processed", out);
 }
 
+////////////////////////////////////////////////////////////////////
 
 int main (int argc, char* const* argv)
 {
     int retCode = EXIT_SUCCESS;
-    bool gray_flag = false;
 
     try
     {
+        // Flag to control grayscale
+        bool gray_flag = false;
+        
         // Default output file name
         cv::String out_name = "out.jpg";
 
@@ -180,10 +190,11 @@ int main (int argc, char* const* argv)
             parser.printErrors();
             return 0;
         }
-
         img.copyTo(out);
 
-        cv::namedWindow("Original", cv::WINDOW_AUTOSIZE); // Create Window
+        cv::namedWindow("Original"); // Create Window
+        cv::imshow("Original", img);
+        
         cv::namedWindow("Processed", cv::WINDOW_AUTOSIZE); // Create Window
 
         cv::createTrackbar("Mult", "Processed", &mult_slider, mult_slider_max, on_trackbar_mult);
@@ -200,7 +211,6 @@ int main (int argc, char* const* argv)
             cv::createTrackbar("B Add", "Processed", &B_slider, add_slider_max, on_trackbar_add_RGB);
         }
 
-        cv::imshow("Original", img);
         cv::imshow("Processed", out);
 
         char key = 0;
@@ -218,7 +228,7 @@ int main (int argc, char* const* argv)
                 sub_flag = true;
                 cout<<"Subtract mode ON"<<endl;
             }
-            else
+            else if((key == 'm' || key == 'M') && sub_flag == true)
             {
                 sub_flag = false;
                 cout<<"Subtract mode OFF"<<endl;

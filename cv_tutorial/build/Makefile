@@ -195,19 +195,6 @@ extra/fast:
 .PHONY : extra/fast
 
 #=============================================================================
-# Target rules for targets named ej1
-
-# Build rule for target.
-ej1: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ej1
-.PHONY : ej1
-
-# fast build rule for target.
-ej1/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ej1.dir/build.make CMakeFiles/ej1.dir/build
-.PHONY : ej1/fast
-
-#=============================================================================
 # Target rules for targets named histo
 
 # Build rule for target.
@@ -220,29 +207,42 @@ histo/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/histo.dir/build.make CMakeFiles/histo.dir/build
 .PHONY : histo/fast
 
-ej1.o: ej1.cpp.o
-.PHONY : ej1.o
+#=============================================================================
+# Target rules for targets named convo
+
+# Build rule for target.
+convo: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 convo
+.PHONY : convo
+
+# fast build rule for target.
+convo/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/convo.dir/build.make CMakeFiles/convo.dir/build
+.PHONY : convo/fast
+
+MAIN.o: MAIN.cpp.o
+.PHONY : MAIN.o
 
 # target to build an object file
-ej1.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ej1.dir/build.make CMakeFiles/ej1.dir/ej1.cpp.o
-.PHONY : ej1.cpp.o
+MAIN.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/convo.dir/build.make CMakeFiles/convo.dir/MAIN.cpp.o
+.PHONY : MAIN.cpp.o
 
-ej1.i: ej1.cpp.i
-.PHONY : ej1.i
+MAIN.i: MAIN.cpp.i
+.PHONY : MAIN.i
 
 # target to preprocess a source file
-ej1.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ej1.dir/build.make CMakeFiles/ej1.dir/ej1.cpp.i
-.PHONY : ej1.cpp.i
+MAIN.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/convo.dir/build.make CMakeFiles/convo.dir/MAIN.cpp.i
+.PHONY : MAIN.cpp.i
 
-ej1.s: ej1.cpp.s
-.PHONY : ej1.s
+MAIN.s: MAIN.cpp.s
+.PHONY : MAIN.s
 
 # target to generate assembly for a file
-ej1.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ej1.dir/build.make CMakeFiles/ej1.dir/ej1.cpp.s
-.PHONY : ej1.cpp.s
+MAIN.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/convo.dir/build.make CMakeFiles/convo.dir/MAIN.cpp.s
+.PHONY : MAIN.cpp.s
 
 extra.o: extra.cpp.o
 .PHONY : extra.o
@@ -412,6 +412,30 @@ prg5.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/prg5.dir/build.make CMakeFiles/prg5.dir/prg5.cpp.s
 .PHONY : prg5.cpp.s
 
+task3.o: task3.cpp.o
+.PHONY : task3.o
+
+# target to build an object file
+task3.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/convo.dir/build.make CMakeFiles/convo.dir/task3.cpp.o
+.PHONY : task3.cpp.o
+
+task3.i: task3.cpp.i
+.PHONY : task3.i
+
+# target to preprocess a source file
+task3.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/convo.dir/build.make CMakeFiles/convo.dir/task3.cpp.i
+.PHONY : task3.cpp.i
+
+task3.s: task3.cpp.s
+.PHONY : task3.s
+
+# target to generate assembly for a file
+task3.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/convo.dir/build.make CMakeFiles/convo.dir/task3.cpp.s
+.PHONY : task3.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -420,7 +444,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... ej1"
+	@echo "... convo"
 	@echo "... extra"
 	@echo "... histo"
 	@echo "... prg1"
@@ -428,9 +452,9 @@ help:
 	@echo "... prg3"
 	@echo "... prg4"
 	@echo "... prg5"
-	@echo "... ej1.o"
-	@echo "... ej1.i"
-	@echo "... ej1.s"
+	@echo "... MAIN.o"
+	@echo "... MAIN.i"
+	@echo "... MAIN.s"
 	@echo "... extra.o"
 	@echo "... extra.i"
 	@echo "... extra.s"
@@ -452,6 +476,9 @@ help:
 	@echo "... prg5.o"
 	@echo "... prg5.i"
 	@echo "... prg5.s"
+	@echo "... task3.o"
+	@echo "... task3.i"
+	@echo "... task3.s"
 .PHONY : help
 
 

@@ -4,7 +4,7 @@
 /home/i72pehej/FSIV_6/cv_tutorial/build/CMakeFiles/prg4.dir
 /home/i72pehej/FSIV_6/cv_tutorial/build/CMakeFiles/prg5.dir
 /home/i72pehej/FSIV_6/cv_tutorial/build/CMakeFiles/extra.dir
-/home/i72pehej/FSIV_6/cv_tutorial/build/CMakeFiles/ej1.dir
 /home/i72pehej/FSIV_6/cv_tutorial/build/CMakeFiles/histo.dir
+/home/i72pehej/FSIV_6/cv_tutorial/build/CMakeFiles/convo.dir
 /home/i72pehej/FSIV_6/cv_tutorial/build/CMakeFiles/edit_cache.dir
 /home/i72pehej/FSIV_6/cv_tutorial/build/CMakeFiles/rebuild_cache.dir

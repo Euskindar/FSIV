@@ -22,7 +22,7 @@ cv::Mat convert_gray_to_rgb(const cv::Mat& img);
  * @param dst resulting image.
  * @param val value to multiply.
  */
-void fsiv_mult_safe(const cv::Mat& src, cv::Mat & dst, int val);
+void fsiv_mult_safe(const cv::Mat& src, cv::Mat & dst, double val);
 
 
 /**
@@ -57,7 +57,7 @@ void fsiv_sub_safe(const cv::Mat& src, cv::Mat & dst, int val);
  * @param val_B value to multiply BLUE channel.
  */
 
-void fsiv_mult_safe_RGB(const cv::Mat& src, cv::Mat& dst, int val_R, int val_G, int val_B);
+void fsiv_mult_safe_RGB(const cv::Mat& src, cv::Mat& dst, double val_R, double val_G, double val_B);
 
 
 /**
