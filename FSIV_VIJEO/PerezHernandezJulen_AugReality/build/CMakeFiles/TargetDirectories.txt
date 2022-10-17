@@ -1,0 +1,4 @@
+/home/i72pehej/UNI_4/FSIV/PerezHernandezJulen_AugReality/build/CMakeFiles/rebuild_cache.dir
+/home/i72pehej/UNI_4/FSIV/PerezHernandezJulen_AugReality/build/CMakeFiles/edit_cache.dir
+/home/i72pehej/UNI_4/FSIV/PerezHernandezJulen_AugReality/build/CMakeFiles/calibration.dir
+/home/i72pehej/UNI_4/FSIV/PerezHernandezJulen_AugReality/build/CMakeFiles/augReal.dir

@@ -1,0 +1,7 @@
+1º CALIBRATION:
+
+	./calibration -w=4 -h=7 -o=intrinsics.yml -n=12 -d=6000 -V board4.mp4
+
+2º AUGMENTED REALITY:
+
+	./augReal 4 7 28 intrinsics.yml board4.mp4

@@ -1,0 +1,3 @@
+/home/i72pehej/UNI_4/FSIV/class_ej/build/CMakeFiles/rebuild_cache.dir
+/home/i72pehej/UNI_4/FSIV/class_ej/build/CMakeFiles/assignment4.dir
+/home/i72pehej/UNI_4/FSIV/class_ej/build/CMakeFiles/edit_cache.dir
