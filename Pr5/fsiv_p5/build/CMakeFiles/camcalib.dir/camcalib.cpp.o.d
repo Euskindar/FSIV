@@ -288,6 +288,11 @@ CMakeFiles/camcalib.dir/camcalib.cpp.o: \
  /usr/local/include/opencv2/core/affine.hpp \
  /usr/local/include/opencv2/calib3d/calib3d_c.h \
  /usr/local/opt/gcc-5.3.0-32/include/c++/5.3.0/iostream \
+ /usr/local/opt/gcc-5.3.0-32/include/c++/5.3.0/fstream \
+ /usr/local/opt/gcc-5.3.0-32/include/c++/5.3.0/bits/codecvt.h \
+ /usr/local/opt/gcc-5.3.0-32/include/c++/5.3.0/i686-pc-linux-gnu/bits/basic_file.h \
+ /usr/local/opt/gcc-5.3.0-32/include/c++/5.3.0/i686-pc-linux-gnu/bits/c++io.h \
+ /usr/local/opt/gcc-5.3.0-32/include/c++/5.3.0/bits/fstream.tcc \
  /home/i72pehej/FSIV_6/Pr5/fsiv_p5/common_code.hpp \
  /usr/local/include/opencv2/imgproc/imgproc.hpp \
  /usr/local/include/opencv2/imgproc.hpp
