@@ -22,9 +22,11 @@ using namespace std;
 using namespace cv;
 
 const String keys =
-"{help h usage ? |      | print this message   }"
-"{list           | images.txt | path to txt with filenames }"
+"{help h usage ? |                | print this message   }"
+"{list           | images.txt     | path to txt with filenames }"
 "{out            | intrinsics.yml | output name }"
+"{size           |                | size of the squares of the chessboard in milimeters}"
+"{video          |                | path of the video with the chessboard }"
 ;
 
 
@@ -61,7 +63,6 @@ int main(int argc,char **argv)
 
 		for (int fix = 0; fix < lfiles.size(); fix++)
 		{
-
 			// TODO: find corners in current image
 
 
