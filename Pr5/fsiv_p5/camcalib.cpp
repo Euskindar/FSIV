@@ -37,6 +37,8 @@ const String keys =
 
 int main(int argc,char **argv)
 {
+	char key = 0;
+
 	CommandLineParser parser(argc, argv, keys);
 	parser.about("Camera calibration");
 
@@ -89,7 +91,7 @@ int main(int argc,char **argv)
 
 		std::vector< std::vector<Point2f> > corners;	// Image corners
 
-		cv::Size patternsize = cv::Size(5, 4);
+		cv::Size patternsize = cv::Size(6, 5);
 
 		for (int fix = 0; fix < lfiles.size(); fix++)
 		{
@@ -100,11 +102,10 @@ int main(int argc,char **argv)
 			std::cout << "Image " << fix+1 << " read : " << lfiles[fix] << std::endl;
 
 			cv::namedWindow("Image Read");
-			cv::imshow("Image Read", image);
 
 			// Find corners
 			bool foundCorners = false;
-			// foundCorners = findChessboardCorners(image, patternsize, corners, (cv::CALIB_CB_ADAPTIVE_THRESH + cv::CALIB_CB_NORMALIZE_IMAGE + cv::CALIB_CB_FAST_CHECK));
+			foundCorners = findChessboardCorners(image, patternsize, corners, (cv::CALIB_CB_ADAPTIVE_THRESH + cv::CALIB_CB_NORMALIZE_IMAGE + cv::CALIB_CB_FAST_CHECK));
 
 			// TODO: add corners to the vector of image corners
 
@@ -112,12 +113,15 @@ int main(int argc,char **argv)
 
 			if(foundCorners)
 			{
-				cv::Size winSize = cv::Size(11, 9);		// patternsize*2+1
+				cv::Size winSize = cv::Size(13, 11);		// patternsize*2+1
 				cv::TermCriteria termcrit(cv::TermCriteria::COUNT|cv::TermCriteria::EPS,20,0.03);
 				cv::cornerSubPix(image, corners, winSize, cv::Size(-1,-1), termcrit);
 			}
 
 			cv::drawChessboardCorners(image, patternsize, corners, foundCorners);
+			cv::imshow("Image Read", image);
+
+			key = cv::waitKey(0);	// Go 1 by 1
 		}
 		std::cout << std::endl;
 
@@ -128,7 +132,6 @@ int main(int argc,char **argv)
 
 		// TODO: run camera calibration
 
-        char key = 0;
         while(key != 27)  // Waits until ESC pressed
         {
             // if(key == 's' || key == 'S')
