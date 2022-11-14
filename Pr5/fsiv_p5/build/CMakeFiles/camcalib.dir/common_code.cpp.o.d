@@ -281,4 +281,11 @@ CMakeFiles/camcalib.dir/common_code.cpp.o: \
  /usr/local/include/opencv2/imgcodecs/imgcodecs_c.h \
  /usr/local/include/opencv2/videoio/videoio_c.h \
  /usr/local/include/opencv2/imgproc/imgproc.hpp \
- /usr/local/include/opencv2/imgproc.hpp
+ /usr/local/include/opencv2/imgproc.hpp \
+ /usr/local/include/opencv2/calib3d.hpp \
+ /usr/local/include/opencv2/features2d.hpp \
+ /usr/local/include/opencv2/flann/miniflann.hpp \
+ /usr/local/include/opencv2/flann/defines.h \
+ /usr/local/include/opencv2/flann/config.h \
+ /usr/local/include/opencv2/core/affine.hpp \
+ /usr/local/include/opencv2/calib3d/calib3d_c.h

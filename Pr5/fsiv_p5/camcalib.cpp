@@ -10,7 +10,7 @@
  * ******************************************/
 
 #include <opencv2/core/core.hpp>
-//#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/calib3d.hpp>
 #include <iostream>
@@ -22,12 +22,16 @@
 using namespace std;
 using namespace cv;
 
+cv::Size patternsize = cv::Size(5, 4);
+cv::Size winSize = cv::Size(11, 9); // patternsize*2+1
+
 const String keys =
-"{help h usage ? |                    | print this message   }"
+"{help h usage ? |                    | print this message }"
 "{list           | ../data/images.txt | path to txt with filenames }"
 "{out            | ../intrinsics.yml  | output name }"
-"{size           |                    | size of the squares of the chessboard in milimeters}"
+"{size           |        50          | size of the squares of the chessboard in milimeters }"
 "{video          |                    | path of the video with the chessboard }"
+"{live           |      false         | set to record a live camera }"
 ;
 
 
@@ -48,7 +52,13 @@ int main(int argc,char **argv)
 		return 0;
 	}
 
-	float sqsize = 100;
+	// Save the output name
+	bool live_cam = parser.get<bool>("live");
+
+	// Save the size of the square in mm
+	float sqsize = parser.get<float>("size");
+
+	// Save the output name
 	cv::String outname = parser.get<cv::String>("out");
 
 	cv::String listtxt = parser.get<cv::String>("list");
@@ -83,70 +93,89 @@ int main(int argc,char **argv)
     in.close();
 
 	cv::Size imageSize;
+	cv::Mat image;
 
 	try
 	{
 		// Create a window to display the images
 		cv::namedWindow("ImagePattern");
 
-		std::vector< std::vector<Point2f> > corners;	// Image corners
-
-		cv::Size patternsize = cv::Size(6, 5);
+		std::vector<cv::Point2f> corners;	// Image corners
+		std::vector< std::vector<cv::Point2f> > total_corners;	// Image corners
 
 		for (int fix = 0; fix < lfiles.size(); fix++)
 		{
 			// TODO: find corners in current image
 
 			// Read the current image from lfiles
-			cv::Mat image = cv::imread(lfiles[fix]);
+			image = cv::imread(lfiles[fix]);
 			std::cout << "Image " << fix+1 << " read : " << lfiles[fix] << std::endl;
-
-			cv::namedWindow("Image Read");
 
 			// Find corners
 			bool foundCorners = false;
-			foundCorners = findChessboardCorners(image, patternsize, corners, (cv::CALIB_CB_ADAPTIVE_THRESH + cv::CALIB_CB_NORMALIZE_IMAGE + cv::CALIB_CB_FAST_CHECK));
-
-			// TODO: add corners to the vector of image corners
-
-
+			foundCorners = cv::findChessboardCorners(image, patternsize, corners/* , (cv::CALIB_CB_ADAPTIVE_THRESH + cv::CALIB_CB_NORMALIZE_IMAGE + cv::CALIB_CB_FAST_CHECK) */);
 
 			if(foundCorners)
 			{
-				cv::Size winSize = cv::Size(13, 11);		// patternsize*2+1
+				std::cout << "Corners found!" << std::endl << std::endl;
+
 				cv::TermCriteria termcrit(cv::TermCriteria::COUNT|cv::TermCriteria::EPS,20,0.03);
-				cv::cornerSubPix(image, corners, winSize, cv::Size(-1,-1), termcrit);
+				cv::Mat aux;
+				cv::cvtColor(image, aux, cv::COLOR_BGR2GRAY);		// Color change to get 1 channel to use cornerSubPix()
+				cv::cornerSubPix(aux, corners, winSize, cv::Size(-1,-1), termcrit);
 			}
 
-			cv::drawChessboardCorners(image, patternsize, corners, foundCorners);
-			cv::imshow("Image Read", image);
+			// TODO: add corners to the vector of image corners
+			total_corners.push_back(corners);
+
+			cv::drawChessboardCorners(image, patternsize, cv::Mat(corners), foundCorners);
+			cv::imshow("ImagePattern", image);
 
 			key = cv::waitKey(0);	// Go 1 by 1
 		}
 		std::cout << std::endl;
 
+		//////////////////////////////////////////////////////////////////////////////
+
 		// TODO
 		// CALIBRATION GOES HERE
+		std::cout << "Calibrating camera . . ." << std::endl;
 
 		// TODO: prepare 3D points
+		std::vector<cv::Point3f> points3d;
+
+		fsiv_boardPoints3d(sqsize, patternsize, points3d);
+		// std::cout << "SQ size: " << std::endl << sqsize << std::endl << std::endl;
+		// std::cout << "Patt. size: " << std::endl << patternsize << std::endl << std::endl;
+		std::cout << "Points 3D: " << std::endl << points3d << std::endl << std::endl;
+
+		// Calibration parameters
+		cv::Mat calib, dist_coeffs;		// Camera matrix and distorsion coefficents
+		// std::vector<cv::Mat> rotVec, trasVec;	// Rotation and traslation vectors
+		double err = 0.0;	// Calibration error
+
+		std::vector< std::vector<cv::Point3f> > object_points;
+
+		////////////////////////////////////////////////////////////// NOSENSE ???????
+		// for (size_t i = 0; i < lfiles.size(); i++)
+		// {
+		// 	object_points.push_back(points3d);
+		// 	std::cout << "Object 3D points: " << std::endl << "Size: " << object_points.size() << std::endl << object_points[i] << std::endl << std::endl;
+		// }
+		//////////////////////////////////////////////////////////////
 
 		// TODO: run camera calibration
+		fsiv_calibrateCamera(object_points, total_corners, image.size(), calib, dist_coeffs/* , rotVec, trasVec */);
+
+		/////////////////////////////////////////////////////////////////////////////////////
 
         while(key != 27)  // Waits until ESC pressed
         {
-            // if(key == 's' || key == 'S')
-            // {
-            //     // Saves to file
-            //     cv::imwrite(outname, img);
-            //     cout << "Image saved!" << endl;
-            // }
-
             key = cv::waitKey(0);
         }
 		// ...
-
 	}
-	catch(std::exception &ex)
+	catch(std::exception& ex)
 	{
 	  cout<<ex.what()<<endl;
 	}
