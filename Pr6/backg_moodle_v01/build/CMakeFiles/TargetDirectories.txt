@@ -1,0 +1,3 @@
+/home/jolon/Escritorio/FSIV/Pr6/backg_moodle_v01/build/CMakeFiles/vsegbase.dir
+/home/jolon/Escritorio/FSIV/Pr6/backg_moodle_v01/build/CMakeFiles/edit_cache.dir
+/home/jolon/Escritorio/FSIV/Pr6/backg_moodle_v01/build/CMakeFiles/rebuild_cache.dir
