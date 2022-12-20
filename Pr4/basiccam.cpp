@@ -36,10 +36,10 @@ const int focal_slider_max = 200;
 const int cx_slider_max = 640;
 const int cy_slider_max = 480;
 
-int angle_slider;
+int angle_slider = 0;
 int focal_slider = 100;
-int cx_slider;
-int cy_slider;
+int cx_slider = 50;
+int cy_slider = 50;
 // ...
 
 ////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ const String keys =
 /**
   * @brief Compute the 2D points given the current parameters
 */
-void fsiv_computeCube2d(cv::Mat & cube2d, float lfocal, float rangle)
+void fsiv_computeCube2d(cv::Mat& cube2d, float lfocal, double rangle)
 {
 	// Create a 3D cube
 	cv::Mat cube = fsiv_cube3d();
@@ -63,20 +63,22 @@ void fsiv_computeCube2d(cv::Mat & cube2d, float lfocal, float rangle)
 	// TODO: create the rotation matrix and apply it to the cube
 	// Use the following expression: cube_rot <-- (cube * Rot) - 0.5; // The -0.5 helps to vizualize the cube
 
-	// ...
+	cv::Mat rot = rotationMatrixZ(rangle);
+	cv::Mat cube_rot = (cube * rot) - 0.0;
+	// std::cout << "cube root mat:" << std::endl << cube_rot << std::endl;
 
 	// Create a camera matrix
-	cv::Mat cam = fsiv_cameraMatrix(lfocal, FSIV_CX, FSIV_CY);
+	cv::Mat cam = fsiv_cameraMatrix(lfocal, cx_slider, cy_slider);
 
 	// Project the cube
-	cube2d = fsiv_projectPoints(cube, cam);
+	cube2d = fsiv_projectPoints(cube_rot, cam);
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void fsiv_recomputeCube2d(void)
+void fsiv_recomputeCube2d(int focal, double angle)
 {
-	fsiv_computeCube2d(cube2d, 100, 0);
+	fsiv_computeCube2d(cube2d, focal, angle);
 
 	// TODO: Clean the window --> set img matrix to all black
 	img.setTo(cv::Scalar(0, 0, 0));
@@ -92,12 +94,13 @@ void fsiv_recomputeCube2d(void)
 
 void on_trackbar_angle(int, void*)
 {
-	// TODO: get the new focal length
-	// ...
-	int focal = 100;
+	double ang;
+
+	ang = angle_slider;
+	std::cout << ang << std::endl;
 
 	// Update the image
-	fsiv_recomputeCube2d();
+	fsiv_recomputeCube2d(focal_slider, ang);
 
 	cv::imshow("Cube", img);
 }
@@ -107,11 +110,9 @@ void on_trackbar_angle(int, void*)
 void on_trackbar_focal(int, void*)
 {
 	// TODO: get the new focal length
-	// ...
-	int focal = 100;
 
 	// Update the image
-	fsiv_recomputeCube2d();
+	fsiv_recomputeCube2d(focal_slider, angle_slider);
 
 	cv::imshow("Cube", img);
 }
@@ -120,12 +121,8 @@ void on_trackbar_focal(int, void*)
 
 void on_trackbar_cx(int, void*)
 {
-	// TODO: get the new focal length
-	// ...
-	int focal = 100;
-
 	// Update the image
-	fsiv_recomputeCube2d();
+	fsiv_recomputeCube2d(focal_slider, angle_slider);
 
 	cv::imshow("Cube", img);
 }
@@ -134,12 +131,8 @@ void on_trackbar_cx(int, void*)
 
 void on_trackbar_cy(int, void*)
 {
-	// TODO: get the new focal length
-	// ...
-	int focal = 100;
-
 	// Update the image
-	fsiv_recomputeCube2d();
+	fsiv_recomputeCube2d(focal_slider, angle_slider);
 
 	cv::imshow("Cube", img);
 }
@@ -176,7 +169,7 @@ int main(int argc,char **argv)
 		cv::namedWindow("Cube");
 
 		// TODO: create trackbars
-		// cv::createTrackbar("Angle", "Cube", &angle_slider, angle_slider_max, on_trackbar_angle);
+		cv::createTrackbar("Angle", "Cube", &angle_slider, angle_slider_max, on_trackbar_angle);
 		cv::createTrackbar("Focal", "Cube", &focal_slider, focal_slider_max, on_trackbar_focal);
 		cv::createTrackbar("Cx", "Cube", &cx_slider, cx_slider_max, on_trackbar_cx);
 		cv::createTrackbar("Cy", "Cube", &cy_slider, cy_slider_max, on_trackbar_cy);
