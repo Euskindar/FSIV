@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/i72pehej/FSIV_6/Pr5/fsiv_p5/camcalib.cpp" "CMakeFiles/camcalib.dir/camcalib.cpp.o" "gcc" "CMakeFiles/camcalib.dir/camcalib.cpp.o.d"
-  "/home/i72pehej/FSIV_6/Pr5/fsiv_p5/common_code.cpp" "CMakeFiles/camcalib.dir/common_code.cpp.o" "gcc" "CMakeFiles/camcalib.dir/common_code.cpp.o.d"
+  "/home/jolon/Escritorio/FSIV/Pr5/fsiv_p5/camcalib.cpp" "CMakeFiles/camcalib.dir/camcalib.cpp.o" "gcc" "CMakeFiles/camcalib.dir/camcalib.cpp.o.d"
+  "/home/jolon/Escritorio/FSIV/Pr5/fsiv_p5/common_code.cpp" "CMakeFiles/camcalib.dir/common_code.cpp.o" "gcc" "CMakeFiles/camcalib.dir/common_code.cpp.o.d"
   )
 
 # Targets to which this target links.

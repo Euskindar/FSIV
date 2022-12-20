@@ -19,16 +19,16 @@ void fsiv_boardPoints3d(const float size, const cv::Size patternsize, std::vecto
 	}
 }
 
-void fsiv_calibrateCamera(const std::vector< std::vector<cv::Point3f> > points3d, const std::vector< std::vector<cv::Point2f> > cornerPoints, const cv::Size imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs)
+double fsiv_calibrateCamera(const std::vector< std::vector<cv::Point3f> > points3d, const std::vector< std::vector<cv::Point2f> > cornerPoints, const cv::Size imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs, cv::Mat& rotVec, cv::Mat& trasVec)
 {
 	CV_Assert(points3d.size() > 0);
 	CV_Assert(cornerPoints.size() > 0);
 
-	
+	double err = -1.0;
 
+	err = cv::calibrateCamera(points3d, cornerPoints, imageSize, cameraMatrix, distCoeffs, rotVec, trasVec);
 
-
-
+	return err;
 }
 
 
